@@ -273,4 +273,24 @@ main {
   z-index: 1;
   overflow-y: scroll;
   grid-area: main;
+  padding: 32px 25px;
+}
+.nav-path {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-path > li:nth-child(1) {
+  font-weight: 700;
+}
+.nav-path > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-path > li > a {
+  color: #222222;
+  font-weight: 300;
 }

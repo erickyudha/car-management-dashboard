@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Management Dashboard</title>
+
+    <link rel="stylesheet" href="styles/master.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="left-nav">
+        <span class="logo-md"></span>
+      </div>
+      <div class="right-nav">
+        <img src="img/icons/burger.svg" alt="burger-menu" />
+        <div>
+          <div class="search-bar">
+            <div class="search-container">
+              <img src="img/icons/search.svg" alt="search-icon" />
+              <input
+                type="search"
+                name=""
+                id="search-input"
+                placeholder="Search"
+              />
+            </div>
+            <button class="btn-blue-outline">Search</button>
+          </div>
+          <button class="user-container">
+            <img src="img/icons/user_logo_placeholder.svg" alt="user-icon" />
+            <span>James Bond</span>
+            <img src="img/icons/dropdown_arrow.svg" alt="dropdown-arrow" />
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="left-sidebar">
+      <span class="logo-sm"></span>
+      <ul>
+        <li>
+          <img src="img/icons/home.svg" alt="home-logo" />
+          <span>Dashboard</span>
+        </li>
+        <li>
+          <img src="img/icons/truck.svg" alt="car-logo" />
+          <span>Cars</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="right-sidebar">
+      <div>
+        <p class="text-bold">CARS</p>
+      </div>
+      <ul>
+        <li><a href="">List Car</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <header>
+        <ul class="nav-path">
+          <li>Cars</li>
+          <li>
+            <img src="img/icons/filepath.svg" alt="" />
+            <a href="">List Car</a>
+          </li>
+        </ul>
+    </main>
+
+    <script src="scripts/master.js"></script>
+  </body>
+</html>
