@@ -27,6 +27,11 @@ body {
     "sidebar-a nav nav"
     "sidebar-a sidebar-b main";
 }
+body.nav-active {
+  grid-template-areas:
+    "sidebar-a nav nav"
+    "sidebar-a main main";
+}
 
 a {
   text-decoration: none;
@@ -117,6 +122,9 @@ nav {
   grid-template-columns: 220px auto;
   grid-area: nav;
 }
+nav.active {
+  grid-template-columns: auto;
+}
 
 .left-nav,
 .right-nav {
@@ -128,12 +136,18 @@ nav {
   display: flex;
   align-items: center;
 }
+.left-nav.active {
+  display: none;
+}
 .right-nav {
   display: flex;
   align-content: center;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+}
+.right-nav > img {
+  cursor: pointer;
 }
 .right-nav > div {
   display: flex;
@@ -218,6 +232,9 @@ nav {
   grid-area: sidebar-b;
   background-color: #fff;
 }
+.right-sidebar.active {
+  display: none;
+}
 .right-sidebar > div {
   color: #8a8a8a;
   max-height: 42px;
@@ -255,4 +272,5 @@ nav {
 main {
   z-index: 1;
   overflow-y: scroll;
+  grid-area: main;
 }
