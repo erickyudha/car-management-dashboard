@@ -12,7 +12,7 @@ class FileInput {
         const element =
             `
             <button type="button">
-                <input type="file" name="${this.varName}" id="${this.labelId}">
+                <input type="file" accept="image/*" name="${this.varName}" id="${this.labelId}">
                 <span>${this.placeholderText}</span>
                 <img src="${this.iconPath}" alt="upload-icon" />
             </button>
@@ -51,6 +51,10 @@ class FileInput {
 
             if (!ACCEPTED_FILE_EXT.includes(fileExt)) {
                 alert("File is not an image!");
+                inputElement.value = "";
+            } else if (inputElement.files[0].size > 2097152) {
+                alert("File size is to big!");
+                inputElement.value = "";
             } else {
                 inputTextElement.innerHTML = filename;
             }
