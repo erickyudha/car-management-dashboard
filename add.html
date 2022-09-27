@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Car - BCR</title>
+
+    <link rel="stylesheet" href="styles/master.css" />
+    <link rel="stylesheet" href="styles/form.css" />
+    <link rel="stylesheet" href="styles/add.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="left-nav">
+        <span class="logo-md"></span>
+      </div>
+      <div class="right-nav">
+        <img src="img/icons/burger.svg" alt="burger-menu" />
+        <div>
+          <div class="search-bar">
+            <div class="search-container">
+              <img src="img/icons/search.svg" alt="search-icon" />
+              <input
+                type="search"
+                name=""
+                id="search-input"
+                placeholder="Search"
+              />
+            </div>
+            <button class="btn-blue-outline">Search</button>
+          </div>
+          <button class="user-container">
+            <img src="img/icons/user_logo_placeholder.svg" alt="user-icon" />
+            <span>James Bond</span>
+            <img src="img/icons/dropdown_arrow.svg" alt="dropdown-arrow" />
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="left-sidebar">
+      <span class="logo-sm"></span>
+      <ul>
+        <li>
+          <img src="img/icons/home.svg" alt="home-logo" />
+          <span>Dashboard</span>
+        </li>
+        <li>
+          <img src="img/icons/truck.svg" alt="car-logo" />
+          <span>Cars</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="right-sidebar">
+      <div>
+        <p class="text-bold">CARS</p>
+      </div>
+      <ul>
+        <li><a href="">List Car</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <header>
+        <ul class="nav-path">
+          <li>Cars</li>
+          <li>
+            <img src="img/icons/filepath.svg" alt="" />
+            <a href="index.html">List Car</a>
+          </li>
+          <li>
+            <img src="img/icons/filepath.svg" alt="" />
+            <a href="">Add New Car</a>
+          </li>
+        </ul>
+
+        <h1>Add New Car</h1>
+      </header>
+      <form action="index.html" method="post">
+        <ul class="input-list">
+          <li>
+            <label for="carName">
+              Nama
+              <span class="required-symb">*</span>
+            </label>
+            <input
+              type="text"
+              autocomplete="off"
+              placeholder="Avanza"
+              id="carName"
+              name="carName"
+            />
+          </li>
+          <li>
+            <label for="rentPerDay">
+              Sewa Per Hari
+              <span class="required-symb">*</span>
+            </label>
+            <input
+              type="text"
+              autocomplete="off"
+              placeholder="Rp 0.-"
+              name="rentPerDay"
+              id="rentPerDay"
+            />
+          </li>
+          <li>
+            <label for="carSize">
+              Ukuran
+              <span class="required-symb">*</span>
+            </label>
+            <div id="car-size-input"></div>
+          </li>
+          <li>
+            <label for="carImg">
+              Foto
+              <span class="required-symb">*</span>
+            </label>
+            <div id="pic-input"></div>
+          </li>
+          <li>
+            <span></span>
+            <span>File size max. 2MB</span>
+          </li>
+        </ul>
+        <div>
+          <a href="">Cancel</a>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </main>
+
+    <script src="scripts/master.js"></script>
+    <script src="scripts/components/DropdownInput.js"></script>
+    <script src="scripts/components/FileInput.js"></script>
+    <script src="scripts/add.js"></script>
+  </body>
+</html>

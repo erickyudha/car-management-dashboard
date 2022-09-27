@@ -1,0 +1,142 @@
+/*
+  FORM COMPONENT STYLE
+*/
+.input-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 2px;
+
+  list-style: none;
+  color: #3c3c3c;
+}
+
+.input-list > li {
+  display: grid;
+  grid-template-columns: 150px 350px;
+  justify-items: start;
+  align-items: center;
+  height: 36px;
+}
+
+.input-list .required-symb {
+  color: red;
+}
+
+.input-list > li > div {
+  width: 100%;
+  height: 100%;
+}
+.input-list > li > input {
+  width: calc(100% - 26px);
+  padding: 9px 12px;
+  height: calc(100% - 20px);
+  border: 1px solid;
+  border-radius: 2px;
+}
+.input-list > li > input:focus {
+  outline: none;
+  border-color: #5269d3;
+}
+.input-list > li:last-child {
+  height: 14px;
+  color: #8a8a8a;
+  margin-top: -10px;
+  font-size: 10px;
+}
+
+/* DROPDOWN COMPONENT */
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  gap: 8px;
+
+  width: 100%;
+  height: 36px;
+
+  border: 1px solid #3c3c3c;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.input-container:focus {
+  border-color: #5269d3;
+}
+.input-container.active {
+  border-color: #5269d3;
+}
+.input-container > input {
+  border: none;
+}
+.input-container > input:focus {
+  outline: none;
+}
+
+.select-input {
+  width: 100%;
+}
+.select-btn > img {
+  transition: ease-out 0.2s;
+  transform: rotate(0deg);
+}
+.select-btn > img.active {
+  transition: ease-in 0.2s;
+  transform: rotate(180deg);
+}
+.select-dropdown {
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  padding: 0;
+  margin: 4px 0;
+  opacity: 0;
+  transition: 0.1s ease-out;
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+}
+.select-dropdown.active {
+  visibility: visible;
+  opacity: 1;
+  transition: 0.1s ease-in;
+  z-index: 6;
+}
+.select-dropdown > li {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+}
+.select-dropdown > li > input {
+  display: none;
+}
+.select-dropdown > li:hover {
+  background: rgb(181, 231, 248);
+  color: #5269d3;
+  font-style: bold;
+}
+
+/* FILE UPLOAD COMPONENT */
+.file-input {
+  display: flex;
+  width: 100%;
+}
+.file-input > button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border: solid 1px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.file-input input[type="file"] {
+  display: none;
+}
