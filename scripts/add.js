@@ -17,7 +17,9 @@ const carPicInput = new FileInput(
     "pic-input",
     "Click to select file...",
     "img/icons/upload.svg",
-    "carImg"
+    "carImg",
+    "pic-input-validation"
 )
 carPicInput.render();
 carPicInput.init();
+

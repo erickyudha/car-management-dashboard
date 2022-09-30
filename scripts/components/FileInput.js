@@ -1,18 +1,19 @@
 class FileInput {
-    constructor(renderId, placeholderText, iconPath, varName, labelId) {
+    constructor(renderId, placeholderText, iconPath, varName, validationLabelId) {
         this.varName = varName;
         this.iconPath = iconPath;
         this.placeholderText = placeholderText;
         this.renderId = renderId;
         this.renderElement = document.getElementById(renderId);
-        this.labelId = labelId || "";
+        this.validationLabelId = validationLabelId;
+        this.validationLabelElement = document.getElementById(validationLabelId);
     }
 
     render() {
         const element =
             `
             <button type="button">
-                <input type="file" accept="image/*" name="${this.varName}" id="${this.labelId}">
+                <input type="file" accept="image/*" name="${this.varName}" id="${this.varName}">
                 <span>${this.placeholderText}</span>
                 <img src="${this.iconPath}" alt="upload-icon" />
             </button>
@@ -31,7 +32,7 @@ class FileInput {
         inputTextElement.style.color = PLACEHOLDER_COLOR;
 
         inputTextElement.addEventListener('DOMSubtreeModified', () => {
-            inputTextElement.style.color = SELECTED_COLOR;
+
         })
 
 
@@ -46,18 +47,33 @@ class FileInput {
         inputElement.onchange = () => {
             const ACCEPTED_FILE_EXT = ["jpg", "svg", "jpeg", "png"];
 
-            const filename = inputElement.files[0].name;
+            let filename = inputElement.files[0].name;
             const fileExt = filename.split(".").slice(-1)[0].toLocaleLowerCase();
 
+            let inputValid = true;
             if (!ACCEPTED_FILE_EXT.includes(fileExt)) {
-                alert("File is not an image!");
-                inputElement.value = "";
+                this.validationLabelElement.innerHTML = "File is not an image!";
+                inputValid = false;
             } else if (inputElement.files[0].size > 2097152) {
-                alert("File size is to big!");
-                inputElement.value = "";
+                this.validationLabelElement.innerHTML = "File size is to big! Max file size: 2MB";
+                inputValid = false;
             } else {
-                inputTextElement.innerHTML = filename;
+                this.validationLabelElement.innerHTML = "File size max. 2MB";
             }
+
+            if (inputValid) {
+                inputTextElement.style.color = SELECTED_COLOR;
+                uploadBtn.style.borderColor = "#000";
+                this.validationLabelElement.style.color = "#8A8A8A";
+            } else {
+                inputElement.value = "";
+                inputTextElement.style.color = PLACEHOLDER_COLOR;
+                uploadBtn.style.borderColor = "#ff0000";
+                this.validationLabelElement.style.color = "#ff0000";
+                filename = this.placeholderText
+            }
+            inputTextElement.innerHTML = filename;
+
         }
     }
 }
