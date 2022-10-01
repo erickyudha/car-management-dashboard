@@ -2,9 +2,9 @@
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-    cloud_name: "Rahasia", // TODO: Ganti dengan cloudname-mu
-    api_key: "Rahasia", // TODO: Ganti dengan API Key-mu
-    api_secret: "Rahasia", // TODO: Ganti dengan API Secret-mu
+    cloud_name: "dgjwtquka",
+    api_key: "851982188236256",
+    api_secret: "DhkUsZjzVEC-ARzZgXYM9UMSNvA",
     secure: true,
 });
 

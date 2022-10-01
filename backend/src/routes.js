@@ -1,9 +1,9 @@
 const express = require('express');
 
 const multer = require("multer")
-const upload = require("./upload");
-const uploadOnMemory = require("./uploadOnMemory");
-const cloudinary = require("./loudinary");
+const upload = require("./handler/upload");
+const uploadOnMemory = require("./handler/uploadOnMemory");
+const cloudinary = require("./handler/cloudinary");
 
 const carData = require("../test_data.json");
 
@@ -68,5 +68,39 @@ router.delete('/cars/:carId', (req, res) => {
 })
 
 // IMAGE UPLOAD HANDLER
+router.put("/cars/:id/picture",
+    upload.single("picture"),
+    (req, res) => {
+        const url = `/uploads/${req.file.filename}`;
+        res
+            .status(200)
+            .json({ message: "Foto berhasil di-upload, silahkan cek URL", url });
+    }
+);
+
+router.put("/cars/:id/picture/cloudinary",
+    uploadOnMemory.single("picture"),
+    (req, res) => {
+        const fileBase64 = req.file.buffer.toString("base64");
+        const file = `data:${req.file.mimetype};base64,${fileBase64}`;
+
+        cloudinary.uploader.upload(file, function (err, result) {
+            if (!!err) {
+                console.log(err);
+                return res.status(400).json({
+                    message: "Gagal upload file!",
+                });
+            }
+
+            res.status(201).json({
+                message: "Upload image berhasil",
+                url: result.url,
+            });
+        });
+    }
+);
+
+
+
 
 module.exports = router;
