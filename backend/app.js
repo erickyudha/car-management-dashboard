@@ -6,7 +6,6 @@ const path = require("path")
 const morgan = require('morgan')
 
 const router = require("./src/routes");
-const handler = require("./src/handler");
 
 const express = require("express"),
     app = express();
@@ -20,7 +19,7 @@ app.use(morgan("dev"))
 app.use(express.json());
 
 // ROUTERS
-app.use("/", router);
+app.use("/api", router);
 
 // START
 app.listen(port, function () {

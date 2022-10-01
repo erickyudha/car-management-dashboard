@@ -1,5 +1,10 @@
 const express = require('express');
 
+const multer = require("multer")
+const upload = require("./upload");
+const uploadOnMemory = require("./uploadOnMemory");
+const cloudinary = require("./loudinary");
+
 const carData = require("../test_data.json");
 
 const router = express.Router();
@@ -61,5 +66,7 @@ router.delete('/cars/:carId', (req, res) => {
     // delete car based on id in db
     res.send("hyedwaadooo")
 })
+
+// IMAGE UPLOAD HANDLER
 
 module.exports = router;
