@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "bcr-management-dashboard_development",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "bcr-management-dashboard_staging",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": "admin",
+    "database": "bcr-management-dashboard_production",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  }
+}
