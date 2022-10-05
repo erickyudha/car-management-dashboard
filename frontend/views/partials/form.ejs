@@ -1,0 +1,52 @@
+<form>
+  <ul class="input-list">
+    <li>
+      <label for="carName">
+        Nama
+        <span class="required-symb">*</span>
+      </label>
+      <input
+        type="text"
+        autocomplete="off"
+        placeholder="Avanza"
+        id="carName"
+        name="carName"
+      />
+    </li>
+    <li>
+      <label for="rentPerDay">
+        Sewa Per Hari
+        <span class="required-symb">*</span>
+      </label>
+      <input
+        type="text"
+        autocomplete="off"
+        placeholder="Rp 0.-"
+        name="rentPerDay"
+        id="rentPerDay"
+      />
+    </li>
+    <li>
+      <label for="carSize">
+        Ukuran
+        <span class="required-symb">*</span>
+      </label>
+      <div id="car-size-input"></div>
+    </li>
+    <li>
+      <label for="carImg">
+        Foto
+        <span class="required-symb">*</span>
+      </label>
+      <div id="pic-input"></div>
+    </li>
+    <li>
+      <span></span>
+      <span id="pic-input-validation">File size max. 2MB</span>
+    </li>
+  </ul>
+  <div class="form-control">
+    <a class="btn-blue-outline" href="">Cancel</a>
+    <a id="save-car-btn" class="btn-blue">Save</a>
+  </div>
+</form>

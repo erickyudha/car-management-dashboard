@@ -103,8 +103,7 @@ a {
   line-height: 20px;
 }
 .btn-blue-outline:hover {
-  color: #fff;
-  background: #0d28a6;
+  background: #eaeaea;
 }
 .btn-blue {
   padding: 8px 12px;
