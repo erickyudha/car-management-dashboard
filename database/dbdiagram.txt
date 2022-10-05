@@ -1,0 +1,29 @@
+Table cars {
+  id int [pk, increment]
+  name varchar
+  size_id int
+  rent_per_day int
+  img_id int
+  
+  last_update timestamp [default: `now()`]
+  indexes {
+    (id, size_id, img_id)
+  }
+}
+
+// MENGGUNAKAN TABEL SENDIRI UNTUK sizes DAN image UNTUK DEMONSTRASI ERD
+// * SECARA PRIBADI UNTUK USECASE INI MENURUT SAYA SEMUA DATA
+// * LEBIH BAIK DIJADIKAN 1 TABLE SAJA
+
+Table sizes {
+  id int [pk, increment]
+  name varchar
+}
+
+Table images {
+  id int [pk, increment]
+  url varchar
+}
+
+Ref: public.cars.size_id > public.sizes.id
+Ref: public.cars.img_id - public.images.id

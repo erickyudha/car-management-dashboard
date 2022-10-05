@@ -1,6 +1,5 @@
 const express = require('express');
 
-const multer = require("multer")
 const upload = require("./handler/upload");
 const uploadOnMemory = require("./handler/uploadOnMemory");
 const cloudinary = require("./handler/cloudinary");
