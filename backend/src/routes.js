@@ -110,11 +110,19 @@ router.delete('/cars/:carId', (req, res) => {
         where: { id: carId }
     })
         .then(car => {
-            res.status(201)
-                .json({
-                    status: "success",
-                    message: `Delete data with id=${carId} successfully`
-                })
+            if (car) {
+                res.status(201)
+                    .json({
+                        status: "success",
+                        message: `Delete data with id=${carId} successfully`
+                    })
+            } else {
+                res.status(404)
+                    .json({
+                        status: "failed",
+                        message: `Delete data with id=${carId} failed: data not found`
+                    })
+            }
         })
         .catch(err => {
             res.status(422)
