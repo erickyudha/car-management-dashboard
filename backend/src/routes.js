@@ -6,15 +6,22 @@ const cloudinary = require("./handler/cloudinary");
 const { Car } = require("./handler/db-handler/models");
 
 const router = express.Router();
-
+const CLOUDINARY_DIR = "bcr-management-dashboard"
 
 
 // API ROUTES
 router.get('/', (req, res) => {
-    res.json({
-        status: "success",
-        message: 'Hello world'
-    });
+    try {
+        res.json({
+            status: "success",
+            message: 'Hello world'
+        });
+    } catch (error) {
+        res.status(404).json({
+            status: "failed",
+            message: error.message
+        })
+    }
 });
 
 router.get('/cars', (req, res) => {
@@ -111,6 +118,7 @@ router.delete('/cars/:carId', (req, res) => {
     })
         .then(car => {
             if (car) {
+                cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${carId}`)
                 res.status(201)
                     .json({
                         status: "success",
@@ -134,7 +142,9 @@ router.delete('/cars/:carId', (req, res) => {
 })
 
 // IMAGE UPLOAD HANDLER
+
 router.post("/cars/picture",
+    // Unused as of now
     upload.single("picture"),
     (req, res) => {
         const url = `/uploads/${req.file.filename}`;
@@ -144,18 +154,39 @@ router.post("/cars/picture",
     }
 );
 
-router.post("/cars/picture/cloudinary",
+router.put("/cars/:carId/picture/cloudinary",
     uploadOnMemory.single("picture"),
     (req, res) => {
+        const carId = req.params.carId;
         const fileBase64 = req.file.buffer.toString("base64");
         const file = `data:${req.file.mimetype};base64,${fileBase64}`;
 
         cloudinary.uploader
             .upload(file, {
                 height: 160, width: 270, crop: "fit",
-                folder: "test"
+                folder: "bcr-management-dashboard", public_id: carId
             })
             .then(result => {
+                function isIdUnique(id) {
+                    return Car.count({ where: { id: id } })
+                        .then(count => {
+                            if (count === 1) {
+                                return true;
+                            }
+                            return false;
+                        });
+                }
+
+                isIdUnique(carId).then(isUnique => {
+                    if (isUnique) {
+                        Car.update({
+                            image_url: result.url
+                        }, {
+                            where: { id: carId }
+                        })
+                    }
+                });
+
                 res.status(201).json({
                     status: "success",
                     message: "Upload image successfully",
