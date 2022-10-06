@@ -3,7 +3,7 @@ const express = require('express');
 const upload = require("./handler/upload");
 const uploadOnMemory = require("./handler/uploadOnMemory");
 const cloudinary = require("./handler/cloudinary");
-const { Car } = require("./handler/db-handler/models");
+const { Car, Setting } = require("./handler/db-handler/models");
 
 const router = express.Router();
 const CLOUDINARY_DIR = "bcr-management-dashboard"
@@ -11,17 +11,10 @@ const CLOUDINARY_DIR = "bcr-management-dashboard"
 
 // API ROUTES
 router.get('/', (req, res) => {
-    try {
-        res.json({
-            status: "success",
-            message: 'Hello world'
-        });
-    } catch (error) {
-        res.status(404).json({
-            status: "failed",
-            message: error.message
-        })
-    }
+    res.json({
+        status: "success",
+        message: 'Hello world'
+    });
 });
 
 router.get('/cars', (req, res) => {
@@ -62,10 +55,11 @@ router.get('/cars/:carId', (req, res) => {
 
 router.post('/cars', (req, res) => {
     Car.create({
-        name: req.body.name || "",
-        size: req.body.size || "small",
-        rent_per_day: req.body.rentPerDay || 0,
-        image_url: req.body.imageUrl || "https://res.cloudinary.com/dgjwtquka/image/upload/v1664957618/placeholder-image-1_vg0wc9.jpg"
+        name: req.body.name,
+        size: req.body.size,
+        rent_per_day: req.body.rentPerDay,
+        image_id: req.body.imageId,
+        image_url: req.body.imageUrl
     })
         .then(car => {
             res.status(201)
@@ -85,12 +79,18 @@ router.post('/cars', (req, res) => {
 
 router.put('/cars/:carId', (req, res) => {
     const carId = req.params.carId;
+    Car.findOne({
+        where: { id: carId }
+    }).then(car => {
+        cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${car.image_id}`)
+    })
 
     Car.update({
         name: req.body.name,
         size: req.body.size,
         rent_per_day: req.body.rentPerDay,
-        image_url: req.body.imageUrl || "https://res.cloudinary.com/dgjwtquka/image/upload/v1664957618/placeholder-image-1_vg0wc9.jpg"
+        image_id: req.body.imageId,
+        image_url: req.body.imageUrl
     }, {
         where: { id: carId }
     })
@@ -112,37 +112,40 @@ router.put('/cars/:carId', (req, res) => {
 
 router.delete('/cars/:carId', (req, res) => {
     const carId = req.params.carId;
-
-    Car.destroy({
+    Car.findOne({
         where: { id: carId }
-    })
-        .then(car => {
-            if (car) {
-                cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${carId}`)
-                res.status(201)
-                    .json({
-                        status: "success",
-                        message: `Delete data with id=${carId} successfully`
-                    })
-            } else {
-                res.status(404)
+    }).then(car => {
+        cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${car.image_id}`)
+    }).then(result => {
+        Car.destroy({
+            where: { id: carId }
+        })
+            .then(car => {
+                if (car) {
+                    res.status(201)
+                        .json({
+                            status: "success",
+                            message: `Delete data with id=${carId} successfully`
+                        })
+                } else {
+                    res.status(404)
+                        .json({
+                            status: "failed",
+                            message: `Delete data with id=${carId} failed: data not found`
+                        })
+                }
+            })
+            .catch(err => {
+                res.status(422)
                     .json({
                         status: "failed",
-                        message: `Delete data with id=${carId} failed: data not found`
+                        message: `Delete data with id=${carId} failed: ${err.message}`
                     })
-            }
-        })
-        .catch(err => {
-            res.status(422)
-                .json({
-                    status: "failed",
-                    message: `Delete data with id=${carId} failed: ${err.message}`
-                })
-        })
+            })
+    })
 })
 
 // IMAGE UPLOAD HANDLER
-
 router.post("/cars/picture",
     // Unused as of now
     upload.single("picture"),
@@ -154,43 +157,24 @@ router.post("/cars/picture",
     }
 );
 
-router.put("/cars/:carId/picture/cloudinary",
+router.post("/cars/picture/cloudinary",
     uploadOnMemory.single("picture"),
     (req, res) => {
-        const carId = req.params.carId;
+        const public_id = Date.now() + "-" + Math.round(Math.random() * 1e9);
         const fileBase64 = req.file.buffer.toString("base64");
         const file = `data:${req.file.mimetype};base64,${fileBase64}`;
 
         cloudinary.uploader
             .upload(file, {
                 height: 160, width: 270, crop: "fit",
-                folder: "bcr-management-dashboard", public_id: carId
+                folder: "bcr-management-dashboard", public_id: public_id
             })
             .then(result => {
-                function isIdUnique(id) {
-                    return Car.count({ where: { id: id } })
-                        .then(count => {
-                            if (count === 1) {
-                                return true;
-                            }
-                            return false;
-                        });
-                }
-
-                isIdUnique(carId).then(isUnique => {
-                    if (isUnique) {
-                        Car.update({
-                            image_url: result.url
-                        }, {
-                            where: { id: carId }
-                        })
-                    }
-                });
-
                 res.status(201).json({
                     status: "success",
                     message: "Upload image successfully",
                     url: result.url,
+                    public_id: public_id
                 });
             })
             .catch(err => {

@@ -215,3 +215,6 @@ main {
 .alert.neutral {
   background: #151515;
 }
+.alert.error {
+  background: red;
+}

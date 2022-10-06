@@ -9,6 +9,10 @@ class DashboardApp {
         this.cancelConfirmBtn = document.getElementById("confirm-cancel-btn");
 
         this.alertElement = document.querySelector(".alert");
+
+        const params = new URLSearchParams(window.location.search)
+        this.queryAction = params.get("action");
+        this.queryStatus = params.get("status");
     }
 
     async showAlert(type, message) {
@@ -23,11 +27,12 @@ class DashboardApp {
         setTimeout(() => {
             this.alertElement.classList.remove(type)
             this.alertElement.classList.add("hidden");
-        }, 2500).then(res => {
-            this.alertElement.style.visibility = "hidden";
-            this.alertElement.style.display = "none";
-        })
 
+            setTimeout(() => {
+                this.alertElement.style.visibility = "hidden";
+                this.alertElement.style.display = "none";
+            }, 500)
+        }, 2500)
     }
 
     async fetchCarData() {
@@ -41,7 +46,6 @@ class DashboardApp {
                 this.carListContainer.innerHTML = "<h2>Server Error: Try again later</h2>"
                 console.error(error);
             });
-
     }
 
     async removeCarData(id) {
@@ -136,6 +140,22 @@ class DashboardApp {
                     this.run();
                 }
             })
+        }
+
+        if (this.queryAction) {
+            let type = "neutral"
+            let message = ""
+            if (this.queryStatus === "success") {
+                type = "success"
+                message = (this.queryAction === "add") ? "Data Berhasil Disimpan" : "Edit Data Berhasil"
+            } else {
+                type = "error"
+                message = "Terjadi kesalahan tak terduga"
+            }
+            this.showAlert(type, message)
+            setTimeout(() => {
+                history.replaceState({}, document.title, "/");
+            }, 3000)
         }
     }
 }

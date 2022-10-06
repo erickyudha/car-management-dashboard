@@ -5,11 +5,14 @@
 
     <title>BCR - Add Car</title>
     <link rel="stylesheet" href="styles/form.css" />
+    <script src="./scripts/components/AddCarApp.js" defer></script>
     <script src="./scripts/add.js" defer></script>
   </head>
   <body>
     <%- include("./partials/nav") %>
-
+    <span class="form-overlay">
+      <span id="html-spinner"></span>
+    </span>
     <main>
       <header>
         <ul class="nav-path">
