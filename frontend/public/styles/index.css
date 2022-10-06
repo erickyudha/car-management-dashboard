@@ -134,12 +134,17 @@
   color: #fa2c5a;
   border-color: #fa2c5a;
 }
+.btn-delete:hover {
+  background-color: #e8e8e8;
+}
 .btn-edit {
   background: #5cb85f;
   border-color: #5cb85f;
   color: #fff;
 }
-
+.btn-edit:hover {
+  background-color: #7cc57e;
+}
 .delete-confirm {
   position: fixed;
   top: 0;
@@ -197,6 +202,7 @@ main {
   margin-top: 0;
   opacity: 1;
   transition: 0.15s ease-in;
+  user-select: none;
 }
 .alert.hidden {
   opacity: 0;

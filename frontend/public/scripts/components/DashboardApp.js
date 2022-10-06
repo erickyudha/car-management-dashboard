@@ -15,6 +15,7 @@ class DashboardApp {
         const alertTextElement = this.alertElement.querySelector("span");
         alertTextElement.innerHTML = message;
 
+        this.alertElement.style.visibility = "visible";
         this.alertElement.style.display = "flex";
         this.alertElement.classList.add(type);
         this.alertElement.classList.remove("hidden");
@@ -23,6 +24,7 @@ class DashboardApp {
             this.alertElement.classList.remove(type)
             this.alertElement.classList.add("hidden");
         }, 2500).then(res => {
+            this.alertElement.style.visibility = "hidden";
             this.alertElement.style.display = "none";
         })
 
@@ -117,7 +119,7 @@ class DashboardApp {
         this.run();
 
         // Hide Alert
-        this.alertElement.style.display = "none";
+        this.alertElement.style.visibility = "hidden";
 
         // Radio Event Handler
         let prevSelectedRadioNum = "1";
