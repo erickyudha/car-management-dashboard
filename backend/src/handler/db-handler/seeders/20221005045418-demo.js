@@ -7,8 +7,8 @@ module.exports = {
       name: "Toyota Test",
       size: "small",
       rent_per_day: 120000,
-      image_id: 24,
-      image_url: "https://res.cloudinary.com/dgjwtquka/image/upload/v1664777033/jhgk9ugrtrsqsbzmqn0p.jpg",
+      image_id: 1,
+      image_url: "https://res.cloudinary.com/dgjwtquka/image/upload/v1664959593/phqnlmh3b7ocuwtdpfvi.jpg",
       createdAt: new Date(),
       updatedAt: new Date()
     }
