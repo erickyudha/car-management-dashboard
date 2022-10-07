@@ -197,16 +197,10 @@ Meng-upload car image ke Cloudinary lalu mengembalikan *public_id* dan *url* nya
     http://localhost:4000/api/cars/picture/cloudinary
 
 #### *Expected Request*
-Request Type: `application/json`   
+Request Type: `multipart/form-data`   
 Request Body:   
 
-    {
-    	"name": string,
-    	"size": string,
-    	"rentPerDay": number,
-    	"imageId": string,
-    	"imageUrl": string,
-    }
+    picture: file
 
 
 #### *Expected Response*
