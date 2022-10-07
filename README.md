@@ -1,6 +1,6 @@
 # BCR - Car Management Dashboard
 
-Aplikasi web express.js untuk management data mobil dengan fungsi CRUD. Aplikasi dibuat sebagai bagian dari challenge chapter 5, fullstack web development course di Binar Academy.
+Aplikasi web express.js untuk management data mobil dengan fungsi CRUD. Aplikasi dibuat sebagai bagian dari challenge chapter 5, fullstack web development course di Binar Academy. Aplikasi dibuat berdasarkan [desain dari figma](https://www.figma.com/file/BauisL5XNnbfGxqvvq6Bh9/BCR---Car-Management-Dashboard-(Copy)?node-id=18343%3A5831).
 
 # Frontend Server
 ## Setup Server
