@@ -51,7 +51,8 @@ const formValidation = () => {
 
     if (carNameInput.value === "") isValid = false;
     if (rentPerDayInput.value === "") isValid = false;
-    if (picInput.value === "") isValid = false;
+    const picInputText = picInput.parentNode.querySelector("span");
+    if (picInputText.innerHTML === "Click to select file...") isValid = false;
 
     const sizeInputVal = document.querySelector(sizeInputSelectedSelector)
     if (sizeInputVal === null) sizeInput[0].checked = true;

@@ -82,16 +82,24 @@ router.put('/cars/:carId', (req, res) => {
     Car.findOne({
         where: { id: carId }
     }).then(car => {
+        // Delete previous image from cloudinary to prevent storage bloating
         cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${car.image_id}`)
     })
 
-    Car.update({
+    let data = {
         name: req.body.name,
         size: req.body.size,
         rent_per_day: req.body.rentPerDay,
-        image_id: req.body.imageId,
-        image_url: req.body.imageUrl
-    }, {
+    }
+    if (req.body.editImg) {
+        data = {
+            ...data,
+            image_id: req.body.imageId,
+            image_url: req.body.imageUrl
+        }
+    }
+
+    Car.update(data, {
         where: { id: carId }
     })
         .then(car => {
@@ -115,6 +123,7 @@ router.delete('/cars/:carId', (req, res) => {
     Car.findOne({
         where: { id: carId }
     }).then(car => {
+        // Delete image from cloudinary to prevent storage bloating
         cloudinary.uploader.destroy(`${CLOUDINARY_DIR}/${car.image_id}`)
     }).then(result => {
         Car.destroy({

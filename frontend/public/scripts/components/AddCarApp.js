@@ -37,11 +37,11 @@ class AddCarApp {
         // require api config file
         const url = `http://${api.host}:${api.port}/api/cars`;
         const data = {
-            "name": this.nameInput.value,
-            "size": document.querySelector(this.sizeInputSelector).value,
-            "rentPerDay": parseInt(this.rentPerDayInput.value),
-            "imageId": this.savedImgId,
-            "imageUrl": this.savedImgUrl
+            name: this.nameInput.value,
+            size: document.querySelector(this.sizeInputSelector).value,
+            rentPerDay: parseInt(this.rentPerDayInput.value),
+            imageId: this.savedImgId,
+            imageUrl: this.savedImgUrl
         }
 
         return fetch(url, {
@@ -81,7 +81,6 @@ class AddCarApp {
                         console.error(error);
                         hostname += "?action=add&status=failed";
                     }).finally(() => {
-                        document.body.style.cursor = 'default'
                         location.href = hostname;
                     })
             }

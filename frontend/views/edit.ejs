@@ -3,20 +3,22 @@
   <head>
     <%- include("./partials/head") %> <%- include("./partials/form-script") %>
 
+    <script src="./scripts/components/EditCarApp.js" defer></script>
     <script src="./scripts/edit.js" defer></script>
-    <link rel="stylesheet" href="styles/form.css" />
-    <title>Edit Car - BCR</title>
+    <title>BCR - Edit Car</title>
   </head>
   <body>
     <%- include("./partials/nav") %>
-
+    <span class="form-overlay">
+      <span id="html-spinner"></span>
+    </span>
     <main>
       <header>
         <ul class="nav-path">
           <li>Cars</li>
           <li>
             <img src="img/icons/filepath.svg" alt="" />
-            <a href="index.html">List Car</a>
+            <a href="/">List Car</a>
           </li>
           <li>
             <img src="img/icons/filepath.svg" alt="" />
