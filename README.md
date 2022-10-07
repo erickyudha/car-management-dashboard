@@ -8,7 +8,8 @@ Aplikasi web express.js untuk management data mobil dengan fungsi CRUD. Aplikasi
     cd frontend
     npm install
     
-`npm install` diperlukan untuk menginstall semua dependencies yang diperlukan dalam project.
+`npm install` diperlukan untuk menginstall semua dependencies yang diperlukan dalam project.  
+Apabila diperlukan backend api settings dapat diubah di `frontend/public/config/api.js`
 
 ## Running Server
 
