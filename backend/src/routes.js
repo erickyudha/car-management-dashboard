@@ -3,7 +3,7 @@ const express = require('express');
 const upload = require("./handler/upload");
 const uploadOnMemory = require("./handler/uploadOnMemory");
 const cloudinary = require("./handler/cloudinary");
-const { Car, Setting } = require("./handler/db-handler/models");
+const { Car } = require("./handler/db-handler/models");
 
 const router = express.Router();
 const CLOUDINARY_DIR = "bcr-management-dashboard"
@@ -103,7 +103,7 @@ router.put('/cars/:carId', (req, res) => {
         where: { id: carId }
     })
         .then(car => {
-            res.status(201)
+            res.status(200)
                 .json({
                     status: "success",
                     message: `Edit data with id=${carId} successfully`
@@ -131,7 +131,7 @@ router.delete('/cars/:carId', (req, res) => {
         })
             .then(car => {
                 if (car) {
-                    res.status(201)
+                    res.status(200)
                         .json({
                             status: "success",
                             message: `Delete data with id=${carId} successfully`
@@ -161,7 +161,7 @@ router.post("/cars/picture",
     (req, res) => {
         const url = `/uploads/${req.file.filename}`;
         res
-            .status(200)
+            .status(201)
             .json({ message: "Foto berhasil di-upload, silahkan cek URL", url });
     }
 );
